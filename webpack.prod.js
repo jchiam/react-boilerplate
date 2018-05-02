@@ -6,6 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = merge(common, {
   mode: 'production',
@@ -37,7 +38,8 @@ module.exports = merge(common, {
         cache: true,
         parallel: true,
         sourceMap: true
-      })
+      }),
+      new OptimizeCSSAssetsPlugin({})
     ]
   },
   plugins: [
