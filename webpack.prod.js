@@ -10,6 +10,9 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = merge(common, {
   mode: 'production',
+  output: {
+    filename: '[name]-[chunkhash].bundle.js',
+  },
   module: {
     rules: [
       {
@@ -51,7 +54,7 @@ module.exports = merge(common, {
       chunks: ['main', 'vendor']
     }),
     new ExtractTextPlugin({
-      filename: 'style.css',
+      filename: 'style-[chunkhash].css',
       allChunks: false
     }),
     new CleanWebpackPlugin(['dist'])
