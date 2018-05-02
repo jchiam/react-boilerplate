@@ -7,6 +7,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = merge(common, {
   mode: 'production',
@@ -28,10 +29,18 @@ module.exports = merge(common, {
     noEmitOnErrors: false,
     splitChunks: {
       cacheGroups: {
+        react: {
+          name: 'react',
+          test: /[\\/]node_modules[\\/]react|redux|prop-types[\\/]/,
+          chunks: 'all',
+          priority: 10,
+          enforce: true
+        },
         vendor: {
           name: 'vendor',
           test: /[\\/]node_modules[\\/]/,
           chunks: 'all',
+          priority: 0,
           enforce: true
         }
       }
@@ -51,12 +60,13 @@ module.exports = merge(common, {
     }),
     new HtmlWebpackPlugin({
       template: 'src/index.ejs',
-      chunks: ['main', 'vendor']
+      chunks: ['main', 'react', 'vendor']
     }),
     new ExtractTextPlugin({
       filename: 'style-[chunkhash].css',
       allChunks: false
     }),
-    new CleanWebpackPlugin(['dist'])
+    new CleanWebpackPlugin(['dist']),
+    new BundleAnalyzerPlugin()
   ]
 });
