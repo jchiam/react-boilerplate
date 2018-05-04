@@ -1,7 +1,7 @@
 {
-  "name": "pokedex",
+  "name": "react-boilerplate",
   "version": "1.0.0",
-  "description": "Web application to track personal Pokémon collection",
+  "description": "React boilerplate for personal use",
   "main": "index.js",
   "author": "Jonathan Chiam",
   "license": "MIT",
