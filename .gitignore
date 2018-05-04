@@ -10,5 +10,6 @@ dist
 # misc
 .DS_Store
 .env
+.awcache
 npm-debug.log
 firebase-debug.log
