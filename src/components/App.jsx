@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 
 export default class App extends Component {
   render() {
+    const { children } = this.props;
     return (
-      <div>{this.props.children}</div>
+      <div>{children}</div>
     );
   }
 }

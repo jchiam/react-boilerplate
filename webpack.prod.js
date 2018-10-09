@@ -5,9 +5,9 @@ const common = require('./webpack.common.js');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = merge(common, {
   mode: 'production',
@@ -46,7 +46,7 @@ module.exports = merge(common, {
       }
     },
     minimizer: [
-      new UglifyJsPlugin({
+      new TerserPlugin({
         cache: true,
         parallel: true,
         sourceMap: true
@@ -66,7 +66,7 @@ module.exports = merge(common, {
       filename: 'style-[chunkhash].css',
       allChunks: false
     }),
-    new CleanWebpackPlugin(['dist']),
-    new BundleAnalyzerPlugin()
+    new CleanWebpackPlugin(['dist'])
+    // new BundleAnalyzerPlugin()
   ]
 });
